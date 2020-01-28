@@ -1,0 +1,156 @@
+Inversão de controle:  transferir responsabilidade de um lugar para outro. Com inuito de diminuir o acoplamente e aumento a coesão.
+A Injeção de Dependências é a forma que usamos para atingir a inversão de controle. 
+
+Exemplo de inversão de controle por construtor:
+
+
+Imagine a sintonização de um canal através de uma antena comum conforme o exemplo abaixo:
+
+public class Televisao {
+ 
+  public void sintonizar canal(final int canal){
+    Sintonizador sintonizador = new SintonizadorPorAntena();
+    sintonizador.sintonizar(canal) ;
+  }
+ 
+}
+
+
+--> agora você queira que a sintonização da sua TV seja realizada por um aparelho a cabo e não mais por antena.
+
+-->será necessário realizar uma manutenção na sua TV que a principio não tinha nenhum problema, ou seja,
+==>uma unidade externa absolutamente independente do seu aparelho exigiu uma manutenção nele.
+
+public class Televisao {
+ 
+  public void sintonizar canal(final int canal){
+    Sintonizador sintonizador = new SintonizadorPorCabo();
+    sintonizador.sintonizar(canal) ;
+  }
+ 
+}
+
+
+-->toda vez que houver a necessidade de se alterar o sintonizador de uma televisão.
+
+
+
+Para resolver esse problema realizaremos uma inversão de controle que prontamente removerá a lógica de instanciação do sintonizador
+a classe televisão. 
+Para isso podemos usar duas abordagens: obter a instância de sintonizador a partir do uso de um ServiceLocator ou então, 
+realizando uma injeção de dependência. Optaremos neste artigo por uma injeção de dependência do tipo “constructor injection” 
+o que significa que injetaremos a dependência chamando um método construtor.
+
+
+public class Televisao {
+ 
+  public final Sintonizador sintonizador;
+ 
+public class Televisao(final Sintonizador sintonizador){
+    this.sintonizador = sintonizador;
+  }
+ 
+public void sintonizarCanal(final int canal){
+    sintonizador.sintonizar(canal) ;
+  }
+ 
+}
+
+--------------------------------------------------------------------------
+Injeção por Setter (Setter Injection)
+
+Setters são métodos utilizados para a passagem de dados entre classes e são bastante comuns na maioria das linguagens de 
+programação para garantir controle no acesso e alteração de parâmetros internos das classes.
+A injeção de dependência por um setter no nosso exemplo pode ser feita da seguinte forma:
+
+
+class MyActivity {
+    private MyPresenter presenter;
+    public void onCreate() {
+        ...
+        presenter = new MyPresenter();
+        presenter.setRepository(new UserRepository());
+    }
+}
+class MyPresenter {
+    private UserRepository repository;
+    public void setRepository(UserRepository repository) {
+        this.repository = repository;
+    }
+}
+
+Dessa forma, o presenter continua não sendo responsável pela inicialização do repository, 
+que está sendo feita através do método setRepository(). Lembrando que o exemplo gira em torno da classe MyPresenter, 
+já que até então, a classe MyActivity não está aplicando os conceitos vistos aqui até o momento.
+Apesar de oferecer flexibilidade para que o client possa definir a dependência em um momento diferente da sua inicialização, 
+isso pode causar problemas caso o repository seja utilizado antes que o método setRepository() seja chamado, 
+ocorrendo erros como NullPointerException (no caso da linguagem Java). 
+Quando temos várias dependências sendo injetadas através deste método, 
+pode ficar difícil garantir que todas sejam definidas antes de serem realmente utilizadas.
+
+--------------------------------------------------------------------------
+Injeção por Interface (Interface Injection)
+Esta estratégia é bastante parecida com a anterior. A diferença é que é criada uma interface e a classe client a implementa.
+
+interface RepositorySetter {
+    public void setRepository();
+}
+class MyPresenter implements RepositorySetter {
+    private UserRepository repository;
+    @Override
+    public void setRepository(UserRepository repository) {
+        this.repository = repository;
+    }
+}
+
+
+Uma interface é como um contrato entre um client e uma dependência. 
+Apesar da dependência ficar totalmente ignorante em relação ao client, ela recebe uma referência do mesmo e retorna uma 
+referencia dela mesma, se tornando uma "injetora". Para que esta estratégia seja útil de alguma forma, 
+a dependência deve tomar alguma ação antes de devolver uma referência de si mesma ao client.
+--------------------------------------------------------------------------
+
+
+OUTRO EXEMPLO INJEÇÃO POR SETTER:
+
+ exemplo de injeção de dependências através do uso de setters:
+
+public class MinhaClasse {
+ 
+  private MeuRecurso meuRecurso;
+ 
+  public MinhaClasse() { }
+ 
+  public MeuRecurso getMeuRecurso(){
+    return this.meuRecurso;
+  }
+ 
+  public setMeuRecurso(MeuRecurso meuRecurso){
+    this.meuRecurso = meuRecurso;
+  }
+ 
+  public seuMetodoQueUsaORecurso(){
+    meuRecurso.fazAlgumaCoisa();
+  }
+}
+
+
+A partir do exemplo anterior percebemos que a MinhaClasse faz o uso de um método construtor vazio, sem argumentos, 
+porém define o meuRecurso a partir de um método set tornando possível instanciar a classe sem a 
+necessidade de definir qualquer propriedade padrão. Essa técnica ainda viabiliza mudarmos o meuRecurso a
+medida em que precisarmos mas, por outro lado, também permite que essa propriedade nunca seja definida. 
+Essa propriedade vem da ideia de que uma classe deva ser configurável e possa ser instanciada a partir de valores defaults
+previamente definidos.
+
+--------------------------------------------------------------------------
+
+
+Referências:
+
+
+https://fpierin.wordpress.com/2012/08/03/escolhendo-entre-injecao-de-dependencias-por-construtores-e-injecao-de-dependencias-por-setters/
+
+
+https://fpierin.wordpress.com/2012/07/31/desmistificando-o-conceito-de-inversao-de-controle-e-sua-relacao-com-a-injecao-de-dependencia/
+
+https://medium.com/@silvioper/inje%C3%A7%C3%A3o-de-depend%C3%AAncias-e-invers%C3%A3o-de-controle-com-exemplos-aa95f41c9f11
