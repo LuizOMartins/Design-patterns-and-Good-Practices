@@ -1,0 +1,87 @@
+DECORATOR
+
+QUANDO USAR ?
+Quando for preciso incrementar novas funcionalidades.
+Sempre que percebemos que temos comportamentos que podem ser compostos por comportamentos de outras classes envolvidas em uma mesma hierarquia, como foi o caso dos impostos, que podem ser composto por outros impostos. O Decorator introduz a flexibilidade na composição desses comportamentos, bastando escolher no momento da instanciação, quais instancias serão utilizadas para realizar o trabalho.
+
+
+O QUE FAZ ?
+O padrão Decorator permite que um usuário adicione novas funcionalidades a um objeto existente sem alterar sua estrutura. 
+
+
+- Comportamentos compostos por outros comportamentos Decotaror:
+
+
+Visa juntar comportamentos separados.
+
+Exemplo Decorator:
+Nesse exemplo tem uma classe Abstrat imposto, onde ela possui um atributo dela mesmo, do Tipo Imposto, para ser o outro imposto.
+Na classe filha é chamado o metodo calculaOutro, onde se outro mais de um Imposto ele será calculado.
+
+
+
+
+  public abstract class Imposto {
+
+          private final Imposto outroImposto;
+          public Imposto(Imposto outroImposto) {
+              this.outroImposto = outroImposto;
+          }
+
+          public Imposto() {
+              outroImposto = null;
+          }
+
+          protected double calculaOutroImposto(Orcamento orcamento) {
+              return (outroImposto == null? 0 : outroImposto.calcula(orcamento));
+          }
+
+          public abstract double calcula(Orcamento orcamento);
+      }
+Em seguida, implementamos impostos concretos que, após realizarem o seu serviço, invocam o próximo imposto a ser calculado, através do método calculaOutroImposto():
+
+
+      public class ISS extends Imposto {
+
+          public ISS(Imposto outroImposto) {
+              super(outroImposto);
+          }
+
+          public ISS() {
+              super();
+          }
+
+          public double calcula(Orcamento orcamento) {
+              return orcamento.getValor() * 0.06 + calculaOutroImposto(orcamento);
+          }
+
+      }
+
+      public class ICMS extends Imposto {
+
+          public ICMS(Imposto imposto) {
+              super(imposto);
+          }
+
+          public ICMS() {
+              super();
+          }
+
+          public double calcula(Orcamento orcamento) {
+              return orcamento.getValor() * 0.1 + calculaOutroImposto(orcamento); 
+          }
+
+      }
+
+      public class TesteDeImpostos {
+
+          public static void main(String[] args) {
+              Imposto impostos = new ISS(new ICMS());
+
+              Orcamento orcamento = new Orcamento(500.0);
+
+              System.out.println(impostos.calcula(orcamento));
+          }
+      }
+
+

@@ -5,7 +5,18 @@ Strategy: (utilização de polimorfismo) No padrão de estratégia, um comportam
 
 
 Cenário: 
-
 Onde exites vários If ou vários medotos.
 
+
+QUANDO USAR ?
+Quando for preciso alterar  o comportamento em tempo de execução.
+
+O QUE FAZ ?
+No padrão de estratégia, um comportamento de classe ou seu algoritmo pode ser alterado em tempo de execução.
+
+_____________________________
+
+
+
+O Strategy nos oferece uma maneira flexível para escrever diversos algoritmos diferentes, e de passar esses algoritmos para classes clientes que precisam deles. Esses clientes desconhecem qual é o algoritmo "real" que está sendo executado, e apenas mandam o algoritmo rodar. Isso faz com que o código da classe cliente fique bastante desacoplado das implementações concretas de algoritmos, possibilitando assim com que esse cliente consiga trabalhar com N diferentes algoritmos sem precisar alterar o seu código.
 

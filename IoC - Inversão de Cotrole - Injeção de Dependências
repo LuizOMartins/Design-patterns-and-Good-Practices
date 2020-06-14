@@ -1,5 +1,9 @@
 Inversão de controle:  transferir responsabilidade de um lugar para outro. Com inuito de diminuir o acoplamente e aumento a coesão.
+
 A Injeção de Dependências é a forma que usamos para atingir a inversão de controle. 
+
+
+###########################
 
 Exemplo de inversão de controle por construtor:
 
@@ -154,3 +158,5 @@ https://fpierin.wordpress.com/2012/08/03/escolhendo-entre-injecao-de-dependencia
 https://fpierin.wordpress.com/2012/07/31/desmistificando-o-conceito-de-inversao-de-controle-e-sua-relacao-com-a-injecao-de-dependencia/
 
 https://medium.com/@silvioper/inje%C3%A7%C3%A3o-de-depend%C3%AAncias-e-invers%C3%A3o-de-controle-com-exemplos-aa95f41c9f11
+
+

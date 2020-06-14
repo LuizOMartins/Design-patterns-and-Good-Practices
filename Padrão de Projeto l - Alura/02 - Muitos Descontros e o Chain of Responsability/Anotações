@@ -1,0 +1,37 @@
+Também conhecido como: CoR,  Corrente de responsabilidade,  Corrente de comando,  Chain of command
+é um padrão que decide de executa a requisição ou passa para frente.
+
+
+
+
+QUANDO USAR ?
+Quando precisar organizar um fluxo sequencialmente.
+O padrão Chain of Responsibility cai como uma luva quando temos uma lista de comandos a serem executados de acordo com algum cenário em específico, e sabemos também qual o próximo cenário que deve ser validado, caso o anterior não satisfaça a condição.
+
+
+O QUE FAZ ?
+Corrente de responsabilidade,  Corrente de comando,  Chain of command
+é um padrão que decide de executa a requisição ou passa para frente.
+
+
+Exemplo:
+
+
+Orçamento
+CalculaOrçamento
+-> regras para orçamento (metodos)
+->condicionais
+
+2° -> alterado os metodos por classe.
+Orçamento
+Calculo1
+Calculo2
+
+
+CalculaOrçamento
+if(desconto == 0) desconto =  new Calculo1.desconto(orçamento);
+
+ precisamos de uma classe que monte essa corrente na ordem certa, com todos os descontos necessários.
+
+
+

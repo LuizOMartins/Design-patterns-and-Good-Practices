@@ -1,0 +1,6 @@
+Interfaces Fluente:
+	-> É um padrão orientado a objetos, que faz parte da categogia de DSL's internas.
+	DLS's: uma linguagem de dominio especifico ( HTML, Expressões regulares...)
+	-> melhora legibilidade de codigos, codigo menos extenso
+
+	-> COMO USAR: basea-se no encademmento de motodos.

@@ -1,0 +1,8 @@
+ServiceLocator: o padrão de design do Service Locator em Java .
+
+Funcionalidade: O objetivo do padrão Localizador de Serviço é retornar as instâncias de serviço sob demanda
+
+QUANDO ?
+
+Isso é útil para dissociar os consumidores de serviços de classes concretas.
+

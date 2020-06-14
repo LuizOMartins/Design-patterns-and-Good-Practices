@@ -1,0 +1,12 @@
+Observer:
+
+
+QUANDO USAR ?
+Quando o acoplamento da nossa classe está crescendo, ou quando temos diversas ações diferentes a serem executadas após um determinado processo, podemos implementar o Observer.
+
+Ele permite que diversas ações sejam executadas de forma transparente à classe principal, reduzindo o acoplamento entre essas ações, facilitando a manutenção e evolução do código
+
+O QUE FAZ ?
+
+O Observer desacopla seu código e possibilita que seu código execute diferentes ações após algum evento.
+Ele permite que você notifique e execute ações após algum acontecimento no seu sistema. E faz isso de tal forma que o acoplamento entre classes continue baixo, e flexível para adicionar novas ações quando necessário.
