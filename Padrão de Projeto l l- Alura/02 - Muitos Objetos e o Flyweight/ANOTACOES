@@ -1,0 +1,22 @@
+
+
+QUANDO USAR ?
+Flyweight serve para quando temos muitas instâncias do mesmo objeto andando pelo sistema, e precisamos economizar. Para tal, o Flyweight faz uso de uma fábrica modificada, que guarda essas instâncias.
+
+
+O QUE FAZ ?
+Flyweight faz uso de uma fábrica modificada, que guarda essas instâncias.
+
+
+Factory x Flyweight:
+Uma Factory instancia uma classe que é importante/complexa, e seu processo de criação deve ser isolado.
+
+Flyweight  x Singleton
+
+A ideia de ambos é garantir que existam apenas uma única referência para o objeto ao longo do programa.
+
+A diferença é que o Flyweight garante que existam apenas uma única instância de vários elementos. É um "singleton maior".
+
+Aplicações gráficas geralmente fazem uso desse padrão, já que elas tem muito objeto repetido.
+
+A própria JVM faz uso de um Flyweight internamente. Quando você declara um "int", e repete o mesmo valor de "int" em vários lugares, ela sempre devolve a mesma instância desse número. É um bom exemplo de implementação do padrão.

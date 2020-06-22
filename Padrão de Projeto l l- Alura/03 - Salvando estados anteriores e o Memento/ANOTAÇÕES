@@ -1,0 +1,18 @@
+Memento.
+
+QUANDO USAR ?
+Quando for necessário obter um historico de um objeto.
+
+O QUE FAZ ?
+Guarda uma lista de estados.
+
+
+
+**Um possível problema é a quantidade de memória que ele pode ocupar, afinal estamos guardando muitas instâncias de objetos que podem ser pesados.
+
+Por isso, dependendo do tamanho dos seus objetos, a classe Estado pode passar a guardar não o objeto todo, mas sim somente as propriedades que mais fazem sentido.
+
+Nada impede você também de limitar a quantidade máxima de objetos no histórico que será armazenado
+
+
+**As definições de padrões de projeto são geralmente as mais genéricas possíveis para dar suporte a qualquer problema. Mas você obviamente deve implementar o padrão de acordo com o seu problema.
