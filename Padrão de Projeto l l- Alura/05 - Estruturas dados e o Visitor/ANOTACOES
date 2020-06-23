@@ -1,0 +1,9 @@
+Criando um exemplo que imprime a expressão.
+Visitor.
+ 
+
+QUANDO USAR ?
+Quando é preciso navegar em uma arvore.
+
+O QUE FAZ ?
+Percorre uma arvore.
